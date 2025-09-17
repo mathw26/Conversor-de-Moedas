@@ -1,0 +1,75 @@
+import os
+import requests
+from unittest import case
+
+print("""
+█▀▀ █▀█ █▄░█ █░█ █▀▀ █▀█ █▀ █▀█ █▀█   █▀▄ █▀▀   █▄▄
+█▄▄ █▄█ █░▀█ ▀▄▀ ██▄ █▀▄ ▄█ █▄█ █▀▄   █▄▀ ██▄   █▄█
+
+█▀▄▀█ █▀█ █▀▀ █▀▄ ▄▀█ █▀
+█░▀░█ █▄█ ██▄ █▄▀ █▀█ ▄█
+""")
+
+
+#Pede para a API as cotações tendo o real como base
+url = "https://api.exchangerate-api.com/v4/latest/BRL"
+resposta = requests.get(url)
+dados = resposta.json()
+
+#Vamos pegar algumas moedas especificas
+dolar = dados['rates']['USD']
+euro = dados['rates']['EUR']
+libra = dados['rates']['GBP']
+pesos_argentinos = dados['rates']['ARS']
+yene = dados['rates']['JPY']
+pesos_chilenos = dados['rates']['CLP']
+
+print(f'1 Real = {dolar} Dólares')
+print(f'1 Real = {euro} Euros')
+print(f'1 Real = {libra} Libra')
+print(f'1 Real = {pesos_argentinos} Argentinos')
+print(f'1 Real = {yene} Yenes')
+print(f'1 Real = {pesos_chilenos} Chilenos\n')
+
+
+reais = float(input('Digite quanto você tem de dinheiro? R$ '))
+print(f'você tem R$ {reais:.2f} reais\n')
+
+def finalizar_app():
+    os.system('cls')
+    print('Finalizou sua conversão')
+
+
+print('Escolha a moeda que deseja converter: \n')
+print('[1]- Dolar')
+print('[2]- Euro')
+print('[3]- Libra')
+print('[4]- Pesos Argentinos')
+print('[5]- Yene')
+print('[6]- Pesos Chilenos')
+print('[7]- Finalizar sua coversão de moedas!\n')
+
+Qual_moeda = int(input('Qual moeda você quer saber sua conversão? '))
+
+
+if Qual_moeda == 1:
+    soma = dolar * reais
+    print(f'Você teria {soma:.2f} Doláres')
+elif Qual_moeda == 2:
+    soma = euro * reais
+    print(f'Você teria {soma:.2f} Euros')
+elif Qual_moeda == 3:
+    soma = libra * reais
+    print(f'Você teria {soma:.2f} Libra')
+elif Qual_moeda == 4:
+    soma = pesos_argentinos * reais
+    print(f'Você teria {soma:.2f} Argentinos')
+elif Qual_moeda == 5:
+    soma = yene * reais
+    print(f'Você teria {soma:.2f} Yenes')
+elif Qual_moeda == 6:
+    soma = pesos_chilenos * reais
+    print(f'Você teria {soma:.2f} Chilenos')
+else:
+    Qual_moeda == 7
+finalizar_app()
