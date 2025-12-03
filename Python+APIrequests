@@ -23,21 +23,29 @@ pesos_argentinos = dados['rates']['ARS']
 yene = dados['rates']['JPY']
 pesos_chilenos = dados['rates']['CLP']
 
-print(f'1 Real = {dolar} Dólares')
-print(f'1 Real = {euro} Euros')
-print(f'1 Real = {libra} Libra')
-print(f'1 Real = {pesos_argentinos} Argentinos')
-print(f'1 Real = {yene} Yenes')
-print(f'1 Real = {pesos_chilenos} Chilenos\n')
+print(f'1 Real = {dolar:.2f} Dólares')
+print(f'1 Real = {euro:.2f} Euros')
+print(f'1 Real = {libra:.2f} Libra')
+print(f'1 Real = {pesos_argentinos:.2f} Argentinos')
+print(f'1 Real = {yene:.2f} Yenes')
+print(f'1 Real = {pesos_chilenos:.2f} Chilenos\n')
 
 
-reais = float(input('Digite quanto você tem de dinheiro? R$ '))
+reais = float(input('Digite quantos reais você tem: R$ '))
 print(f'você tem R$ {reais:.2f} reais\n')
 
 def finalizar_app():
     os.system('cls')
     print('Finalizou sua conversão')
 
+moedas = {
+    1: ('Dólar', dolar),
+    2: ('Euro', euro),
+    3: ('Libra', libra),
+    4: ('Peso Argentino', pesos_argentinos),
+    5: ('Yene', yene),
+    6: ('Peso Chileno', pesos_chilenos)
+}
 
 print('Escolha a moeda que deseja converter: \n')
 print('[1]- Dolar')
@@ -51,24 +59,16 @@ print('[7]- Finalizar sua coversão de moedas!\n')
 Qual_moeda = int(input('Qual moeda você quer saber sua conversão? '))
 
 
-if Qual_moeda == 1:
-    soma = dolar * reais
-    print(f'Você teria {soma:.2f} Doláres')
-elif Qual_moeda == 2:
-    soma = euro * reais
-    print(f'Você teria {soma:.2f} Euros')
-elif Qual_moeda == 3:
-    soma = libra * reais
-    print(f'Você teria {soma:.2f} Libra')
-elif Qual_moeda == 4:
-    soma = pesos_argentinos * reais
-    print(f'Você teria {soma:.2f} Argentinos')
-elif Qual_moeda == 5:
-    soma = yene * reais
-    print(f'Você teria {soma:.2f} Yenes')
-elif Qual_moeda == 6:
-    soma = pesos_chilenos * reais
-    print(f'Você teria {soma:.2f} Chilenos')
+#com a lista de moedas tendo a chave e os valores, exemplo: 1(opção que é a chave): Real(valor)
+#.keys busca as chaves...   .values busca o valor  ...    .items busca chave e valor do dicionario
+
+if Qual_moeda in moedas:
+    nome, taxa = moedas[Qual_moeda]
+    resultado = reais * taxa
+    print(f'Você teria {resultado:.2f} {nome}s')
+elif Qual_moeda == 7:
+    finalizar_app()
 else:
-    Qual_moeda == 7
-finalizar_app()
+    print("Opção inválida.")
+
+
